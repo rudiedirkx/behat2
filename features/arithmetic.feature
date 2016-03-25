@@ -33,8 +33,8 @@ Feature: Arithmetic
 		And we divide by "4"
 		Then we have "2.5"
 
-	Scenario: Drunk maths
+	Scenario: Sober maths
 		Given we start with "5"
 		When we add "5"
 		And we subtract "25"
-		Then we have "0"
+		Then we have "-15"
