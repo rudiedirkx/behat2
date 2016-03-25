@@ -1,0 +1,10 @@
+{
+	"require": {
+		"behat/behat": "^3.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"rdx\\behat2\\": "src"
+		}
+	}
+}
