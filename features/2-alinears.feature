@@ -1,4 +1,4 @@
-Feature: Alinears
+Feature: A-linears
 	Do some highschool maths
 
 	Scenario: Positive power
