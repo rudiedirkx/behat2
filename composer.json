@@ -1,5 +1,5 @@
 {
-	"require": {
+	"require-dev": {
 		"behat/behat": "^3.0"
 	},
 	"autoload": {
