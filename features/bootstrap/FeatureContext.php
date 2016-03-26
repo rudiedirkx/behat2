@@ -11,6 +11,7 @@ class FeatureContext implements Context, SnippetAcceptingContext {
 
 	protected $number;
 	protected $amount = 0;
+	protected $storage = [];
 
 	/**
 	 * Initializes context.
@@ -25,7 +26,7 @@ class FeatureContext implements Context, SnippetAcceptingContext {
 	 * @Given we start with :amount
 	 */
 	public function weStartWith($amount) {
-		$this->amount = (float) $amount;
+		$this->amount = $this->getAmount($amount);
 	}
 
 
@@ -34,28 +35,28 @@ class FeatureContext implements Context, SnippetAcceptingContext {
 	 * @When we add :amount
 	 */
 	public function weAdd($amount) {
-		$this->amount += (float) $amount;
+		$this->amount += $this->getAmount($amount);
 	}
 
 	/**
 	 * @When we subtract :amount
 	 */
 	public function weSubtract($amount) {
-		$this->amount -= (float) $amount;
+		$this->amount -= $this->getAmount($amount);
 	}
 
 	/**
 	 * @When we multiply by :amount
 	 */
 	public function weMultiplyBy($amount) {
-		$this->amount *= (float) $amount;
+		$this->amount *= $this->getAmount($amount);
 	}
 
 	/**
 	 * @When we divide by :amount
 	 */
 	public function weDivideBy($amount) {
-		$this->amount /= (float) $amount;
+		$this->amount /= $this->getAmount($amount);
 	}
 
 	/**
@@ -72,6 +73,38 @@ class FeatureContext implements Context, SnippetAcceptingContext {
 		$this->amount = pow($this->amount, 1 / (float) $exponent);
 	}
 
+	/**
+	 * @When we save that in :slot
+	 */
+	public function weSaveThatIn($slot) {
+		$this->storage[$slot] = $this->amount;
+	}
+
+	/**
+	 * @When we show storage
+	 */
+	public function weShowStorage() {
+		if (empty($this->storage)) {
+			echo "<empty>";
+			return;
+		}
+
+		$rows = [];
+		foreach ($this->storage as $slot => $amount) {
+			$rows[] = [$slot, $amount];
+		}
+
+		$table = new TableNode($rows);
+		echo $table;
+	}
+
+	/**
+	 * @When we clear :slot
+	 */
+	public function weClear($slot) {
+		unset($this->storage[$slot]);
+	}
+
 
 
 	/**
@@ -80,15 +113,36 @@ class FeatureContext implements Context, SnippetAcceptingContext {
 	 * The amount to check against can be a fraction, e.g. "1/3"
 	 */
 	public function weHave($amount) {
-		$check = (float) $amount;
-		if (preg_match('#^(\d+)/(\d+)$#', $amount, $match)) {
-			$check = (float) $match[1] / (float) $match[2];
-		}
-
-		$this->assertAmount($check, $amount);
+		$this->assertAmount($this->getAmount($amount), $amount);
 	}
 
 
+
+	/**
+	 *
+	 */
+	protected function getAmount($amount) {
+		// Float: 4 or 2.5
+		if (preg_match('#^\-?\d+(\.\d+)?$#', $amount)) {
+			return (float) $amount;
+		}
+
+		// Fraction: 1/3
+		if (preg_match('#^(\d+)/(\d+)$#', $amount, $match)) {
+			return (float) $match[1] / (float) $match[2];
+		}
+
+		// Storage: A
+		if (preg_match('#^[A-Z]$#', $amount)) {
+			if (!isset($this->storage[$amount])) {
+				throw new \Exception("Storage for '$amount' is empty");
+			}
+
+			return (float) $this->storage[$amount];
+		}
+
+		throw new \Exception("Invalid format for amount: '$amount'");
+	}
 
 	/**
 	 * Assert result amount.
