@@ -193,12 +193,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/rudiedirkx/behat-variables.git",
-                "reference": "870501885a665c44ffcb1647f1b48f57cc3fdbad"
+                "reference": "7203d2adcb8168368988657ab8bf26d08d79bc4e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rudiedirkx/behat-variables/zipball/870501885a665c44ffcb1647f1b48f57cc3fdbad",
-                "reference": "870501885a665c44ffcb1647f1b48f57cc3fdbad",
+                "url": "https://api.github.com/repos/rudiedirkx/behat-variables/zipball/7203d2adcb8168368988657ab8bf26d08d79bc4e",
+                "reference": "7203d2adcb8168368988657ab8bf26d08d79bc4e",
                 "shasum": ""
             },
             "require-dev": {
@@ -207,7 +207,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "rdx\\behatvars\\": ""
+                    "rdx\\behatvars\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -221,7 +221,7 @@
                 }
             ],
             "description": "Store variables across Scenarios during Behat testing",
-            "time": "2016-03-27 14:56:40"
+            "time": "2016-03-27 15:16:24"
         },
         {
             "name": "symfony/class-loader",
