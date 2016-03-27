@@ -26,7 +26,7 @@ class FeatureContext implements Context, SnippetAcceptingContext {
 	 * @Given we start with :amount
 	 */
 	public function weStartWith($amount) {
-		$this->amount = $this->getAmount($amount);
+		return $this->amount = $this->getAmount($amount);
 	}
 
 
@@ -35,42 +35,42 @@ class FeatureContext implements Context, SnippetAcceptingContext {
 	 * @When we add :amount
 	 */
 	public function weAdd($amount) {
-		$this->amount += $this->getAmount($amount);
+		return $this->amount += $this->getAmount($amount);
 	}
 
 	/**
 	 * @When we subtract :amount
 	 */
 	public function weSubtract($amount) {
-		$this->amount -= $this->getAmount($amount);
+		return $this->amount -= $this->getAmount($amount);
 	}
 
 	/**
 	 * @When we multiply by :amount
 	 */
 	public function weMultiplyBy($amount) {
-		$this->amount *= $this->getAmount($amount);
+		return $this->amount *= $this->getAmount($amount);
 	}
 
 	/**
 	 * @When we divide by :amount
 	 */
 	public function weDivideBy($amount) {
-		$this->amount /= $this->getAmount($amount);
+		return $this->amount /= $this->getAmount($amount);
 	}
 
 	/**
 	 * @When we :exponent power it
 	 */
 	public function wePowerIt($exponent) {
-		$this->amount = pow($this->amount, (float) $exponent);
+		return $this->amount = pow($this->amount, (float) $exponent);
 	}
 
 	/**
 	 * @When we :exponent root it
 	 */
 	public function weRootIt($exponent) {
-		$this->amount = pow($this->amount, 1 / (float) $exponent);
+		return $this->amount = pow($this->amount, 1 / (float) $exponent);
 	}
 
 	/**

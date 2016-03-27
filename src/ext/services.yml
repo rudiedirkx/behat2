@@ -1,0 +1,5 @@
+services:
+  transformation.argument_transformer.behat2:
+    class: rdx\behat2\ext\BehatTransformer
+    tags:
+      -  { name: transformation.argument_transformer, priority: 100 }

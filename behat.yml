@@ -1,0 +1,8 @@
+default:
+  suites:
+    default:
+      contexts:
+        - FeatureContext
+        - rdx\behat2\ctx\BehatContext
+  extensions:
+      rdx\behat2\ext\BehatExtension: ~
