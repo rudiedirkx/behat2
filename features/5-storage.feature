@@ -3,9 +3,9 @@ Feature: Feature storage
 
 	Scenario: Set a variable
 		Given we start with "100"
-		And behat saves it into "A"
+		And we save it into "A"
 		When we start with "20"
-		And behat saves it into "B"
+		And we save it into "B"
 
 	Scenario: Get a variable 1
 		Given we start with "15"
@@ -16,14 +16,14 @@ Feature: Feature storage
 	Scenario: Get a variable 2
 		Given we start with "<<A>>"
 		When we subtract "80"
-		And behat saves it into "C"
+		And we save it into "C"
 		And we start with "<<C>><<B>>"
 		Then we have "2020"
 
 	Scenario Outline: Storage from table
 		Given we start with "0"
 		When we add <Age>
-		And behat saves it into "D"
+		And we save it into "D"
 		And we subtract "1<<D>>"
 		Then we have "-100"
 

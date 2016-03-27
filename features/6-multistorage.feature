@@ -3,6 +3,6 @@ Feature: Multi storage
 
 	Scenario: Create 2 things
 		Given we create user "Fred" in organization "Freddy's"
-		And behat saves it into "UID,ORG"
+		And we save those into "UID,ORG"
 		Then user "<<UID>>" should be "Fred"
 		And organization "<<ORG>>" should be "Freddy's"
