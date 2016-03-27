@@ -10,10 +10,10 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-class BehatExtension implements Extension {
+class Behat2StorageExtension implements Extension {
 
 	public function getConfigKey() {
-		return 'behat2';
+		return 'behat2_storage';
 	}
 
 	public function initialize(ExtensionManager $extensionManager) {

@@ -4,9 +4,9 @@ namespace rdx\behat2\ext;
 
 use Behat\Behat\Definition\Call\DefinitionCall;
 use Behat\Behat\Transformation\Transformer\ArgumentTransformer;
-use rdx\behat2\ctx\BehatContext;
+use rdx\behat2\ctx\Behat2StorageContext;
 
-class BehatTransformer implements ArgumentTransformer {
+class Behat2StorageArgumentTransformer implements ArgumentTransformer {
 
 	const SLOT_NAME_OPEN = '<<';
 	const SLOT_NAME_CLOSE = '>>';
@@ -19,8 +19,8 @@ class BehatTransformer implements ArgumentTransformer {
 	 *
 	 */
 	static public function validSlotName($slot) {
-		$slot = BehatTransformer::SLOT_NAME_OPEN . $slot . BehatTransformer::SLOT_NAME_CLOSE;
-		return preg_match(BehatTransformer::SLOT_NAME_REGEX, $slot);
+		$slot = self::SLOT_NAME_OPEN . $slot . self::SLOT_NAME_CLOSE;
+		return preg_match(self::SLOT_NAME_REGEX, $slot);
 	}
 
 	/**
@@ -51,7 +51,7 @@ class BehatTransformer implements ArgumentTransformer {
 	protected function getContext(DefinitionCall $definitionCall) {
 		$contexts = $definitionCall->getEnvironment()->getContexts();
 		foreach ($contexts as $context) {
-			if ($context instanceof BehatContext) {
+			if ($context instanceof Behat2StorageContext) {
 				return $context;
 			}
 		}

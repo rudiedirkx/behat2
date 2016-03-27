@@ -6,9 +6,9 @@ use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Behat\Hook\Scope\AfterFeatureScope;
 use Behat\Behat\Hook\Scope\AfterStepScope;
-use rdx\behat2\ext\BehatTransformer;
+use rdx\behat2\ext\Behat2StorageArgumentTransformer;
 
-class BehatContext implements Context, SnippetAcceptingContext {
+class Behat2StorageContext implements Context, SnippetAcceptingContext {
 
 	protected $lastResult = null;
 
@@ -51,7 +51,7 @@ class BehatContext implements Context, SnippetAcceptingContext {
 			throw new \Exception("Can't store empty return value. First 'save it'.");
 		}
 
-		if (!BehatTransformer::validSlotName($slot)) {
+		if (!Behat2StorageArgumentTransformer::validSlotName($slot)) {
 			throw new \Exception("Invalid slot name: '$slot'");
 		}
 

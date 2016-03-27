@@ -3,6 +3,6 @@ default:
     default:
       contexts:
         - FeatureContext
-        - rdx\behat2\ctx\BehatContext
+        - rdx\behat2\ctx\Behat2StorageContext
   extensions:
-      rdx\behat2\ext\BehatExtension: ~
+      rdx\behat2\ext\Behat2StorageExtension: ~
