@@ -1,6 +1,7 @@
 {
 	"require-dev": {
-		"behat/behat": "^3.0"
+		"behat/behat": "^3.0",
+		"rdx/behat-variables": "dev-master"
 	},
 	"autoload": {
 		"psr-4": {

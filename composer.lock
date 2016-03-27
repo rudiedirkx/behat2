@@ -4,9 +4,10 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5da59be635e92ddc09c5c52617fd9471",
-    "content-hash": "4ce29f7a702fdb7ccc43b5bf0240637c",
-    "packages": [
+    "hash": "0a5b74a34da38c683f1dc861b36f412a",
+    "content-hash": "ab9e0ddc7b1d47d7cc232d3a35ee0563",
+    "packages": [],
+    "packages-dev": [
         {
             "name": "behat/behat",
             "version": "v3.0.15",
@@ -185,6 +186,42 @@
                 "transliterator"
             ],
             "time": "2015-09-28 16:26:35"
+        },
+        {
+            "name": "rdx/behat-variables",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rudiedirkx/behat-variables.git",
+                "reference": "870501885a665c44ffcb1647f1b48f57cc3fdbad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rudiedirkx/behat-variables/zipball/870501885a665c44ffcb1647f1b48f57cc3fdbad",
+                "reference": "870501885a665c44ffcb1647f1b48f57cc3fdbad",
+                "shasum": ""
+            },
+            "require-dev": {
+                "behat/behat": "^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "rdx\\behatvars\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rudie Dirkx",
+                    "email": "github@hotblocks.nl"
+                }
+            ],
+            "description": "Store variables across Scenarios during Behat testing",
+            "time": "2016-03-27 14:56:40"
         },
         {
             "name": "symfony/class-loader",
@@ -749,10 +786,11 @@
             "time": "2016-02-23 07:41:20"
         }
     ],
-    "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "rdx/behat-variables": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
