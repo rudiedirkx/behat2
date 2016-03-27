@@ -1,5 +1,5 @@
-Feature: Feature variables
-	Remember specific results across Scenarios
+Feature: Feature storage
+	Remember specific results across scenarios
 
 	Scenario: Set a variable
 		Given we start with "100"

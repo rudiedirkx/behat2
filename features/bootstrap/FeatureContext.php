@@ -13,6 +13,8 @@ class FeatureContext implements Context, SnippetAcceptingContext {
 	protected $amount = 0;
 	protected $storage = [];
 
+	static protected $database = [];
+
 	/**
 	 * Initializes context.
 	 */
@@ -27,6 +29,16 @@ class FeatureContext implements Context, SnippetAcceptingContext {
 	 */
 	public function weStartWith($amount) {
 		return $this->amount = $this->getAmount($amount);
+	}
+
+	/**
+	 * @Given we create user :user in organization :organization
+	 */
+	public function weCreateUserInOrganization($user, $organization) {
+		self::$database['users'][$userId = rand()] = $user;
+		self::$database['organizations'][$orgId = rand()] = $organization;
+
+		return [$userId, $orgId];
 	}
 
 
@@ -116,7 +128,30 @@ class FeatureContext implements Context, SnippetAcceptingContext {
 		$this->assertAmount($this->getAmount($amount), $amount);
 	}
 
+	/**
+	 * @Then user :userId should be :user
+	 */
+	public function userShouldBe($userId, $user) {
+		$this->assertDatabaseItem('users', $userId, $user);
+	}
 
+	/**
+	 * @Then organization :orgId should be :organization
+	 */
+	public function organizationShouldBe($orgId, $organization) {
+		$this->assertDatabaseItem('organizations', $orgId, $organization);
+	}
+
+
+
+	/**
+	 *
+	 */
+	protected function assertDatabaseItem($table, $id, $value) {
+		if (@self::$database[$table][$id] !== $value) {
+			throw new \Exception("Record '$table [$id]' does match the given value.");
+		}
+	}
 
 	/**
 	 *

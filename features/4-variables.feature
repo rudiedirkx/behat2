@@ -1,5 +1,5 @@
-Feature: Temporary number storage
-	Store numbers temporarily to make more complex calculations
+Feature: Temporary variables
+	Store numbers per-scenario to make more complex calculations
 
 	Scenario: Save
 		Given we start with "0"

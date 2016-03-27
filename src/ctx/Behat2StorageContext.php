@@ -10,7 +10,7 @@ use rdx\behat2\ext\Behat2StorageArgumentTransformer;
 
 class Behat2StorageContext implements Context, SnippetAcceptingContext {
 
-	protected $lastResult = null;
+	protected $lastResult = [];
 
 	static protected $storage = array();
 
@@ -27,13 +27,16 @@ class Behat2StorageContext implements Context, SnippetAcceptingContext {
 	 * @AfterStep
 	 */
 	public function afterStep(AfterStepScope $scope) {
-		$this->lastResult = null;
+		$this->lastResult = [];
 
 		$result = $scope->getTestResult();
 		if (is_callable(array($result, 'getCallResult'))) {
 			$result = $result->getCallResult();
 			if (is_callable(array($result, 'getReturn'))) {
-				$this->lastResult = $result->getReturn();
+				$result = $result->getReturn();
+				if ($result !== null) {
+					$this->lastResult = is_array($result) && isset($result[0]) ? array_values($result) : [$result];
+				}
 			}
 		}
 	}
@@ -51,16 +54,28 @@ class Behat2StorageContext implements Context, SnippetAcceptingContext {
 	 * @When behat saves it into :slot
 	 */
 	public function behatSavesItInto($slot) {
-		if ($this->lastResult === null) {
+		if (!$this->lastResult) {
 			throw new \Exception("Can't store empty return value. Have a step method return a value.");
 		}
 
-		if (!Behat2StorageArgumentTransformer::validSlotName($slot)) {
-			throw new \Exception("Invalid slot name: '$slot'");
+		$slots = explode(',', $slot);
+		if (count($slots) != count($this->lastResult)) {
+			$slots = count($slots);
+			$results = count($this->lastResult);
+			throw new \Exception("Number of slots ($slots) does not match number of last results ($results).");
 		}
 
-		$this->storageSet($slot, $this->lastResult);
-		$this->lastResult = null;
+		$valids = array_filter($slots, [Behat2StorageArgumentTransformer::class, 'validSlotName']);
+		if ($valids !== $slots) {
+			throw new \Exception("Invalid slot name(s) in '$slot'");
+		}
+
+		foreach ($slots as $index => $slot) {
+			$value = $this->lastResult[$index];
+			$this->storageSet($slot, $value);
+		}
+
+		$this->lastResult = [];
 	}
 
 
