@@ -28,10 +28,7 @@ class Behat2StorageContext implements Context, SnippetAcceptingContext {
 	 */
 	public function afterStep(AfterStepScope $scope) {
 		$result = $scope->getTestResult()->getCallResult();
-		$return = $result->getReturn();
-		if ($return) {
-			$this->lastResult = $return;
-		}
+		$this->lastResult = $result->getReturn();
 	}
 
 	/**
@@ -48,7 +45,7 @@ class Behat2StorageContext implements Context, SnippetAcceptingContext {
 	 */
 	public function behatSavesItInto($slot) {
 		if ($this->lastResult === null) {
-			throw new \Exception("Can't store empty return value. First 'save it'.");
+			throw new \Exception("Can't store empty return value. Have a step method return a value.");
 		}
 
 		if (!Behat2StorageArgumentTransformer::validSlotName($slot)) {
@@ -65,6 +62,11 @@ class Behat2StorageContext implements Context, SnippetAcceptingContext {
 	 *
 	 */
 	protected function storageSet($name, $value) {
+		if (!is_scalar($value)) {
+			$type = gettype($value);
+			throw new \Exception("Storing value must be scalar, but it's a '$type'.");
+		}
+
 		self::$storage[$name] = $value;
 	}
 
@@ -73,7 +75,7 @@ class Behat2StorageContext implements Context, SnippetAcceptingContext {
 	 */
 	public function storageGet($name) {
 		if (!isset(self::$storage[$name])) {
-			throw new \Exception("Value for $name does not exist.");
+			throw new \Exception("Value for '$name' does not exist.");
 		}
 
 		return self::$storage[$name];
