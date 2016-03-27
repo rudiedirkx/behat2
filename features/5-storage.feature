@@ -19,3 +19,16 @@ Feature: Feature variables
 		And behat saves it into "C"
 		And we start with "<<C>><<B>>"
 		Then we have "2020"
+
+	Scenario Outline: Storage from table
+		Given we start with "0"
+		When we add <Age>
+		And behat saves it into "D"
+		And we subtract "1<<D>>"
+		Then we have "-100"
+
+		Examples:
+			| Name | Age |
+			| Fred | 37  |
+			| Phil | 19  |
+			| Jenn | 23  |

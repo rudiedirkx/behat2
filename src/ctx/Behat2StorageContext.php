@@ -27,8 +27,15 @@ class Behat2StorageContext implements Context, SnippetAcceptingContext {
 	 * @AfterStep
 	 */
 	public function afterStep(AfterStepScope $scope) {
-		$result = $scope->getTestResult()->getCallResult();
-		$this->lastResult = $result->getReturn();
+		$this->lastResult = null;
+
+		$result = $scope->getTestResult();
+		if (is_callable(array($result, 'getCallResult'))) {
+			$result = $result->getCallResult();
+			if (is_callable(array($result, 'getReturn'))) {
+				$this->lastResult = $result->getReturn();
+			}
+		}
 	}
 
 	/**
