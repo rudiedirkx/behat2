@@ -1,0 +1,92 @@
+ExtensionType:
+  tag:
+    - ServiceInterface
+
+examples: https://github.com/timiTao/BehatExtensionExamples
+
+Behat\Behat\Context\ServiceContainer\ContextExtension:
+  context.class_resolver:
+    - Behat\Behat\Context\ContextClass\ClassResolver
+    - src/Behat/ClassResolverExtension/Context/ContextClass/ExampleClassResolver.php
+  context.argument_resolver:
+    - Behat\Behat\Context\Argument\ArgumentResolver
+    - src/Behat/ContextArgumentResolverExtension/Context/Argument/ExampleArgumentResolver.php
+  context.initializer:
+    - Behat\Behat\Context\Initializer\ContextInitializer
+    - src/Behat/ContextInitializerExtension/Context/Initializer/Initializer.php
+  context.reader:
+    - Behat\Behat\Context\Reader\ContextReader
+  context.annotation_reader:
+    - Behat\Behat\Context\Annotation\AnnotationReader
+    - src/Behat/AnnotationReaderExtension/Context/Annotation/ExampleAnnotationReader.php
+  context.class_generator:
+    - Behat\Behat\Context\ContextClass\ClassGenerator
+
+Behat\Behat\Definition\ServiceContainer\DefinitionExtension:
+  definition.search_engine:
+    - Behat\Behat\Definition\Search\SearchEngine
+  definition.pattern_policy:
+    - Behat\Behat\Definition\Pattern\Policy\PatternPolicy
+
+Behat\Behat\Snippet\ServiceContainer\SnippetExtension:
+  snippet.generator:
+    - Behat\Behat\Snippet\Generator\SnippetGenerator
+  snippet.appender:
+    - Behat\Behat\Snippet\Appender\SnippetAppender
+
+Behat\Behat\Transformation\ServiceContainer\TransformationExtension:
+  transformation.argument_transformer:
+    - Behat\Behat\Transformation\Transformer\ArgumentTransformer
+    - src/Behat/TransformerExtension/Transformer/ExampleTransformer.php
+
+GherkinExtension:
+  gherkin.loader:
+    - Behat\Gherkin\Loader\LoaderInterface
+
+Behat\Testwork\Call\ServiceContainer\CallExtension:
+  call.call_filter:
+    - Behat\Testwork\Call\Filter\CallFilter
+  call.call_handler:
+    - Behat\Testwork\Call\Handler\CallHandler
+  call.result_filter:
+    - Behat\Testwork\Call\Filter\ResultFilter
+
+Behat\Testwork\Cli\ServiceContainer\CliExtension:
+  cli.controller:
+    - Behat\Testwork\Cli\Controller
+
+Behat\Testwork\Environment\ServiceContainer\EnvironmentExtension:
+  environment.handler:
+    -Behat\Testwork\Environment\Handler\EnvironmentHandler
+  environment.reader:
+    - Behat\Testwork\Environment\Reader\EnvironmentReader
+
+Behat\Testwork\EventDispatcher\ServiceContainer\EventDispatcherExtension:
+  event_dispatcher.subscriber:
+    -
+
+Behat\Testwork\Exception\ServiceContainer\ExceptionExtension:
+  exception.stringer:
+    - Behat\Testwork\Exception\Stringer\ExceptionStringer
+
+Behat\Testwork\Ordering\ServiceContainer\OrderingExtension:
+  tester.orderer:
+    - Behat\Testwork\Ordering\Orderer\Orderer
+
+Behat\Testwork\Output\ServiceContainer\OutputExtension:
+  output.formatter:
+    - Behat\Testwork\Output\Formatter
+
+Behat\Testwork\Specification\ServiceContainer\SpecificationExtension:
+  specifications.locator:
+    - Behat\Testwork\Specification\Locator\SpecificationLocator
+
+Behat\Testwork\Suite\ServiceContainer\SuiteExtension:
+  suite.generator:
+    - Behat\Testwork\Suite\Generator\SuiteGenerator
+  suite.setup:
+    - Behat\Testwork\Suite\Setup\SuiteSetup
+
+Behat\Testwork\Tester\ServiceContainer\TesterExtension:
+  test.result.interpretation:
+    - Behat\Testwork\Tester\Result\Interpretation\ResultInterpretation
