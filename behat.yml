@@ -6,3 +6,4 @@ default:
         - rdx\behatvars\BehatVariablesContext
   extensions:
       rdx\behatvars\BehatVariablesExtension: ~
+      rdx\behat2\Behat2ResultOverrideExtension: ~

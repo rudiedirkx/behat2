@@ -50,6 +50,7 @@ Behat\Testwork\Call\ServiceContainer\CallExtension:
     - Behat\Testwork\Call\Handler\CallHandler
   call.result_filter:
     - Behat\Testwork\Call\Filter\ResultFilter
+    - Behat\Testwork\Call\CallCenter::filterResult()
 
 Behat\Testwork\Cli\ServiceContainer\CliExtension:
   cli.controller:

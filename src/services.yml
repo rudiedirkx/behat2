@@ -1,0 +1,9 @@
+services:
+  call.result_filter.behat2resultfilter:
+    class: rdx\behat2\Behat2ResultFilter
+    tags:
+      -  { name: call.result_filter, priority: 100 }
+  test.result.interpretation.behat2resultinterpreter:
+    class: rdx\behat2\Behat2ResultInterpreter
+    tags:
+      -  { name: test.result.interpretation, priority: 100 }
